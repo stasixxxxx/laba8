@@ -1,0 +1,152 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int task0(void);
+int task1(void);
+int task1A(void);
+int task2(void);
+int task3(void);
+
+int main(void)
+{
+    setlocale(LC_ALL, "RUS");
+    task0();
+    task1();
+    task1A();
+    task2();
+    task3();
+    return 0;
+}
+
+/* Задание 0*/
+int task0(void)
+{
+    int count;
+    char sym;
+    setlocale(LC_ALL, "RUS");
+    
+    printf("--- Задание 0 ---\n");
+    printf("Введите вид символа и количество: ");
+    scanf(" %c %d", &sym, &count);
+    
+    putchar('+'); 
+    for (int start = 1; start <= count; start++)
+    {
+        if (start <= count / 2)
+        {
+            putchar(sym);
+        }
+        else
+        {
+            putchar('-');
+        }
+        putchar('!'); 
+    }
+    putchar('+'); 
+    printf("\n");
+    
+    system("pause");
+    return 0;
+}
+
+int task1(void)
+{
+    int m, n;
+    int s = 0;
+    int k = 1;
+    
+    printf("\n--- Задание 1 ---\n");
+    printf("Введите m и n (где m >= n): ");
+    scanf("%d %d", &m, &n);
+    
+    for (int i = m; i >= n; i--)
+    {
+        s += i;
+        printf("выполнено %d раз\n", k++);
+    }
+    printf("результат %d\n", s);
+    
+    system("pause");
+    return 0;
+}
+
+int task1A(void)
+{
+    int n;
+    
+    printf("\n--- Задание 1А ---\n");
+    printf("Введите максимальную степень n: ");
+    scanf("%d", &n);
+    
+    for (int i = 0; i <= n; i++)
+    {
+        double val = pow(2, i);
+        if (val >= 1024)
+        {
+            printf("2^%2d = %6.1fK\n", i, val / 1024.0);
+        }
+        else
+        {
+            printf("2^%2d = %6.0f\n", i, val);
+        }
+    }
+    
+    system("pause");
+    return 0;
+}
+
+int task2(void)
+{
+    double h_step;
+    double y;
+    
+    printf("\n--- Задание 2 ---\n");
+    printf("Вычисляемая функция: y = |lg x| - (x - 2)^2 на отрезке [2; 4.1]\n");
+    printf("Введите шаг табуляции: ");
+    scanf("%lf", &h_step);
+    
+    printf("_______________________\n");
+    printf("|   x    |    f(x)    |\n");
+    printf("-----------------------\n");
+    
+    for (double x = 2.0; x <= 4.1 + h_step / 2; x += h_step)
+    {
+        y = fabs(log10(x)) - pow(x - 2, 2);
+        printf("|  %5.2f |  %9.4f  |\n", x, y);
+    }
+    printf("-----------------------\n");
+    
+    system("pause");
+    return 0;
+}
+
+int task3(void)
+{
+    int n;
+    double p = 1.0;
+    
+    printf("\n--- Задание 3 ---\n");
+    printf("Вычисление произведения ряда (1 - 1/2)*(1 - 1/4)*...*(1 - 1/2n)\n");
+    printf("Введите число элементов n: ");
+    scanf("%d", &n);
+    
+    if (n < 1)
+    {
+        printf("Ошибка: n должно быть больше или равно 1\n");
+        system("pause");
+        return 0;
+    }
+    
+    for (int i = 1; i <= n; i++)
+    {
+        p *= (1.0 - 1.0 / (2.0 * i));
+    }
+    
+    printf("Результат произведения для n = %d: %.6f\n", n, p);
+    
+    system("pause");
+    return 0;
+}
